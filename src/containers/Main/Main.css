@@ -1,0 +1,13 @@
+.main {
+	text-align: center;
+}
+
+.grid {
+	margin: 0;
+	width: 80%;
+}
+
+img {
+	max-width: 300px;
+	max-height: 400px;
+}
