@@ -78,12 +78,7 @@ class FullMovie extends Component {
               <Recomendations activePage={activePage} changePage={changePage} items={items} />
               <Pagination items={items} activePage={activePage} changePage={changePage} />
             </div>)
-          : (<Recomendations
-              addFavorite={addFavorite}
-              activePage={activePage}
-              changePage={changePage}
-              items={items}
-            />)}
+          : (<Recomendations activePage={activePage} changePage={changePage} items={items} />)}
       </div>
     );
   }

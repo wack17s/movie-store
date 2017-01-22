@@ -3,6 +3,10 @@ import { Pagination } from 'react-bootstrap';
 
 export default class Search extends Component {
 
+  componentDidMount() {
+    this.props.changePage(1)
+  }
+
   handleSelect(eventKey) {
     this.props.changePage(eventKey);
   }

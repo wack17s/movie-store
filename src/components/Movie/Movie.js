@@ -4,7 +4,10 @@ import { Link } from 'react-router';
 export default class Movie extends Component {
 
   handleRemove = () => this.props.removeFavorite(this.props.item);
-  handleAdd = () => this.props.addFavorite(this.props.item);
+  handleAdd = () => {
+    this.props.addFavorite(this.props.item);
+    this.props.fetchPopular();
+  }
 
   render() {
 

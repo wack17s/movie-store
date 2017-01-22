@@ -8,10 +8,10 @@ import { perPage } from '../../utils/utils';
 export default class Album extends Component {
   render() {
 
-    const { items, activePage, changePage, addFavorite } = this.props;
+    const { items, activePage, changePage, addFavorite, fetchPopular } = this.props;
 
     const movieNum = perPage(items.length);
-    const moviLoads = (items, addFavorite) => {
+    const moviLoads = (items, addFavorite, fetchPopular) => {
       let res = [];
       for (let i = 0; i < items.length; ++i) {
         let ifFavorite;
@@ -20,7 +20,13 @@ export default class Album extends Component {
 
         res.push(
           (<div key={items[i].id}>
-            <Movie isFavorite={ifFavorite} isInAlbum={true} addFavorite={addFavorite} item={items[i]} />
+            <Movie
+              isFavorite={ifFavorite}
+              fetchPopular={fetchPopular}
+              isInAlbum={true}
+              addFavorite={addFavorite}
+              item={items[i]}
+            />
           </div>)
         );
       }
@@ -30,7 +36,7 @@ export default class Album extends Component {
 
     return (
         <div className="album">
-          {moviLoads(items, addFavorite).slice(movieNum[activePage], movieNum[activePage]+4)}
+          {moviLoads(items, addFavorite, fetchPopular).slice(movieNum[activePage], movieNum[activePage]+4)}
           {items.length > 4
           ? (<Pagination items={items} activePage={activePage} changePage={changePage} />)
           : (<br></br>)}

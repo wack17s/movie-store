@@ -37,7 +37,14 @@ class Main extends Component {
         <Search fetchPopular={fetchPopular} fetchSearch={fetchSearch} />
         {!isLoaded
           ? 'Err'
-          : (<Album items={items} activePage={activePage} removeFavorite={removeFavorite} addFavorite={addFavorite} changePage={changePage} />)}
+          : (<Album
+              items={items}
+              activePage={activePage}
+              fetchPopular={fetchPopular}
+              removeFavorite={removeFavorite}
+              addFavorite={addFavorite}
+              changePage={changePage}
+            />)}
       </div>
     );
   }
