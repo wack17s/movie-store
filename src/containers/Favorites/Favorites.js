@@ -42,9 +42,7 @@ class Favorites extends Component {
     return (
         <div className="album">
           {moviLoads(items, removeFavorite).slice(movieNum[activePage], movieNum[activePage]+4)}
-          {items.length > 4
-          ? (<Pagination items={items} activePage={activePage} changePage={changePage} />)
-          : (<br></br>)}
+          <Pagination items={items} activePage={activePage} changePage={changePage} />
         </div>
     );
   }

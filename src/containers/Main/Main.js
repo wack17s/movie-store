@@ -22,7 +22,8 @@ function mapStateToProps({ movies, pagination }) {
   return {
     items: movies.items,
     isLoaded: movies.isLoaded,
-    activePage: pagination.activePage
+    activePage: pagination.activePage,
+    search: movies.search
   }
 }
 
@@ -30,7 +31,7 @@ class Main extends Component {
 
   render() {
     const { items, isLoaded, activePage } = this.props;
-    const { fetchPopular, fetchSearch, changePage, addFavorite, removeFavorite } = this.props;
+    const { fetchPopular, fetchSearch, changePage, addFavorite, removeFavorite, search } = this.props;
 
     return (
       <div className="main">
@@ -38,7 +39,9 @@ class Main extends Component {
         {!isLoaded
           ? 'Err'
           : (<Album
+              fetchSearch={fetchSearch}
               items={items}
+              search={search}
               activePage={activePage}
               fetchPopular={fetchPopular}
               removeFavorite={removeFavorite}

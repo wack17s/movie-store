@@ -9,12 +9,13 @@ const initialMovies = {
 	isLoaded: false,
 	items: [],
 	error: null,
+	search: null
 };
 
 export default function movies(state = initialMovies, action) {
   switch(action.type) {
     case MOVIES_LOADING:
-     	return { ...state, isLoading: true, isLoaded: false }
+     	return { ...state, isLoading: true, isLoaded: false, search: action.search }
 
     case MOVIES_SUCCESS:
      	return { ...state, items: action.payload, isLoaded: true, isLoading: false }
@@ -33,7 +34,8 @@ const key = 'c710ec5b42d2d631bab95767eec5608a';
 export function fetchPopular() {
 	return function(dispatch) {
 		dispatch({
-			type: MOVIES_LOADING
+			type: MOVIES_LOADING,
+			search: false
 		});
 
 		return axios.get(`https://api.themoviedb.org/3/movie/popular?
@@ -56,7 +58,8 @@ export function fetchPopular() {
 export function fetchSearch(query) {
 	return function(dispatch) {
 		dispatch({
-			type: MOVIES_LOADING
+			type: MOVIES_LOADING,
+			search: query
 		});
 
 		return axios.get(`https://api.themoviedb.org/3/search/movie?

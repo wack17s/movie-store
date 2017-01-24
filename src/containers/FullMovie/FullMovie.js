@@ -38,47 +38,53 @@ class FullMovie extends Component {
     }
   }
 
-  handleAdd = () => this.props.addFavorite(this.props.item);
+  handleAdd = () => {
+    this.props.addFavorite(this.props.item);
+    this.props.openMovie(this.props.item.id);
+  }
 
   fetchData(id) {
     this.props.openMovie(id);
     this.props.fetchRecomendations(id);
+    this.props.changePage(1);
   }
 
   render() {
     const { item, items, activePage, isLoaded } = this.props;
-    const { changePage, addFavorite } = this.props;
+    const { changePage } = this.props;
 
     const loadMovie = (item) => {
+      let FavButton;
 
       if (lockr.get(['movies' + item.id])) {
-        return (
-          <div>
-            <img role="presentation" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} />
-            <p>Favorite</p>
-          </div>
-        )
+        FavButton = (<p>Favorite</p>)
       } else {
-        return (
-          <div>
-            <img role="presentation" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} />
-            <button type="button" onClick={this.handleAdd} >Add to favorite</button>          
-          </div>
-        )
+        FavButton = (<button type="button" onClick={this.handleAdd} >Add to favorite</button>)
       }
+
+      return FavButton;
     }
 
     return (
       <div className="fullmovie">
         {isLoaded
-          ? loadMovie(item)
-          : 'err'}
-        {items && items.length > 4
           ? (<div>
-              <Recomendations activePage={activePage} changePage={changePage} items={items} />
-              <Pagination items={items} activePage={activePage} changePage={changePage} />
+              {item.original_title}
+              <p><img role="presentation" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} /></p>
+              {loadMovie(item)}
+              <p>{item.overview}</p>
+              <p>{'date: ' + item.release_date}</p>
+              <p>{item.genres.map(genre => genre.name + ' ')}</p>
+              <p>{'homepage: ' + item.homepage}</p>
+              <p>{'product companies: ' + item.production_companies.map(companie => companie.name)}</p>
+              <p>{'countries: ' + item.production_countries.map(country => country.iso_3166_1)}</p>
+              <p>{item.vote_average + '/10 by '}
+              {item.vote_count}</p>
             </div>)
-          : (<Recomendations activePage={activePage} changePage={changePage} items={items} />)}
+          : 'err'}
+          <p>{'R E C O M E N D A T I O N S'}</p>
+          <Recomendations activePage={activePage} changePage={changePage} items={items} search={false} />
+          <Pagination items={items} activePage={activePage} changePage={changePage} />
       </div>
     );
   }

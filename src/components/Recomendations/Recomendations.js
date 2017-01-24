@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Movie from '../Movie/Movie';
 import { perPage } from '../../utils/utils';
 
-export default class Recondations extends Component {
+export default class Recomendations extends Component {
 
   render() {
     const { items, activePage } = this.props;
@@ -11,7 +11,7 @@ export default class Recondations extends Component {
     const movieNum = perPage(items.length);
     const moviLoads = items.map((item) => (
       <div key={item.id}>
-        <Movie item={item} />
+        <Movie item={item} search={false} />
       </div>
     )).slice(movieNum[activePage], movieNum[activePage]+4);
 

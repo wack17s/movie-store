@@ -8,7 +8,7 @@ const initialMovie = {
 	isLoading: false,
 	isLoaded: false,
 	item: null,
-	error: null,
+	error: null
 };
 
 export default function movie(state = initialMovie, action) {
