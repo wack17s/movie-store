@@ -15,7 +15,7 @@ const initialFavorites = {
 export default function favorites(state = initialFavorites, action) {
   switch(action.type) {
     case ADD_FAVORITE:
-    	return { ...state, items: action.payload }
+    	return { ...state }
 
     case REMOVE_FAVORITE:
     	return { ...state, items: action.payload }
@@ -39,14 +39,16 @@ export function addFavorite(movie) {
 
 	return function(dispatch) {
 		dispatch({
-			type: ADD_FAVORITE,
-			payload: lockr.getAll()
+			type: ADD_FAVORITE
 		});
 	}
 }
 
 export function fetchFavorites() {
 	return function(dispatch) {
+		dispatch({
+			type: FAVORITE_LOADING
+		})
 		dispatch({
 			type: FAVORITE_SUCCESS,
 			payload: lockr.getAll()

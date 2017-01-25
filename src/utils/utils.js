@@ -72,5 +72,8 @@ export function getGenre(id) {
     
     case 37:
       return "Western"
+
+    default:
+      return "nvm"
   }
 }

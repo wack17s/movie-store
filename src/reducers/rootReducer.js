@@ -6,10 +6,10 @@ import pagination from "../modules/pagination";
 import favorites from "../modules/favorites";
 
 const rootReducer = combineReducers({
-    movies: movies,
-    movie: movie,
-    pagination: pagination,
-    favorites: favorites
+  movies: movies,
+  movie: movie,
+  pagination: pagination,
+  favorites: favorites
 });
 
 export default rootReducer;

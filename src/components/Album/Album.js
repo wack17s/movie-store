@@ -6,6 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import { perPage } from '../../utils/utils';
 
 export default class Album extends Component {
+  
   render() {
 
     const { items, activePage, changePage, addFavorite, fetchPopular, fetchSearch, search } = this.props;
@@ -39,7 +40,7 @@ export default class Album extends Component {
     return (
         <div className="album">
           {moviLoads(items, addFavorite, fetchPopular).slice(movieNum[activePage], movieNum[activePage]+4)}
-          <Pagination items={items} activePage={activePage} changePage={changePage} />
+          <Pagination items={items} activePage={activePage} changePage={changePage} rec={false} />
         </div>
     );
   }

@@ -32,7 +32,7 @@ export default class Movie extends Component {
         <Link to={`/movie/${item.id}`} >
           <img role="presentation" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} />
         </Link>
-        {item.genre_ids ? item.genre_ids.map(genre => getGenre(genre)) : item.genres.map(genre => genre.name)}
+        {item.genre_ids ? item.genre_ids.map(genre => getGenre(genre) + ' ') : item.genres.map(genre => genre.name + ' ')}
         {addButton(isInAlbum, isFavorite)}
         {removeButton(isInFavorite)}
       </div>

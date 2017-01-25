@@ -21,36 +21,16 @@ function mapStateToProps({ movies, movie, pagination }) {
   return {
     item: movie.item,
     items: movies.items,
-    activePage: pagination.activePage,
+    activePageR: pagination.activePageR,
     isLoaded: movie.isLoaded
   }
 }
 
 class FullMovie extends Component {
 
-  componentDidMount() {
-    this.fetchData(this.props.params.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.params.id !== this.props.params.id) {
-      this.fetchData(nextProps.params.id);
-    }
-  }
-
-  handleAdd = () => {
-    this.props.addFavorite(this.props.item);
-    this.props.openMovie(this.props.item.id);
-  }
-
-  fetchData(id) {
-    this.props.openMovie(id);
-    this.props.fetchRecomendations(id);
-    this.props.changePage(1);
-  }
-
   render() {
-    const { item, items, activePage, isLoaded } = this.props;
+
+    const { item, items, activePageR, isLoaded } = this.props;
     const { changePage } = this.props;
 
     const loadMovie = (item) => {
@@ -70,7 +50,8 @@ class FullMovie extends Component {
         {isLoaded
           ? (<div>
               {item.original_title}
-              <p><img role="presentation" src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} /></p>
+              <p><img role="presentation"
+                      src={'https://image.tmdb.org/t/p/w300_and_h450_bestv2'+ item.poster_path} /></p>
               {loadMovie(item)}
               <p>{item.overview}</p>
               <p>{'date: ' + item.release_date}</p>
@@ -80,11 +61,16 @@ class FullMovie extends Component {
               <p>{'countries: ' + item.production_countries.map(country => country.iso_3166_1)}</p>
               <p>{item.vote_average + '/10 by '}
               {item.vote_count}</p>
+              <p>{'R E C O M E N D A T I O N S'}</p>
+              <Recomendations
+                activePageR={activePageR}
+                changePage={changePage}
+                items={items}
+                search={false}
+              />
+              <Pagination items={items} activePageR={activePageR} changePage={changePage} rec={true} />
             </div>)
           : 'err'}
-          <p>{'R E C O M E N D A T I O N S'}</p>
-          <Recomendations activePage={activePage} changePage={changePage} items={items} search={false} />
-          <Pagination items={items} activePage={activePage} changePage={changePage} />
       </div>
     );
   }

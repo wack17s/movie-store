@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { fetchPopular, fetchSearch } from '../../modules/movies';
 import { changePage } from '../../modules/pagination';
-import { addFavorite, removeFavorite } from '../../modules/favorites';
+import { addFavorite } from '../../modules/favorites';
 
 import Album from '../../components/Album/Album';
 import Search from '../../components/Search/Search';
@@ -14,8 +14,7 @@ const mapDispatchToProps = {
   fetchPopular,
   fetchSearch,
   changePage,
-  addFavorite,
-  removeFavorite
+  addFavorite
 };
 
 function mapStateToProps({ movies, pagination }) {
@@ -31,20 +30,19 @@ class Main extends Component {
 
   render() {
     const { items, isLoaded, activePage } = this.props;
-    const { fetchPopular, fetchSearch, changePage, addFavorite, removeFavorite, search } = this.props;
+    const { fetchPopular, fetchSearch, changePage, addFavorite, search } = this.props;
 
     return (
       <div className="main">
         <Search fetchPopular={fetchPopular} fetchSearch={fetchSearch} />
         {!isLoaded
-          ? 'Err'
+          ? 'Loading'
           : (<Album
               fetchSearch={fetchSearch}
               items={items}
               search={search}
               activePage={activePage}
               fetchPopular={fetchPopular}
-              removeFavorite={removeFavorite}
               addFavorite={addFavorite}
               changePage={changePage}
             />)}

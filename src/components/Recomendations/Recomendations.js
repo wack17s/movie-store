@@ -6,14 +6,14 @@ import { perPage } from '../../utils/utils';
 export default class Recomendations extends Component {
 
   render() {
-    const { items, activePage } = this.props;
+    const { items, activePageR } = this.props;
 
     const movieNum = perPage(items.length);
     const moviLoads = items.map((item) => (
       <div key={item.id}>
         <Movie item={item} search={false} />
       </div>
-    )).slice(movieNum[activePage], movieNum[activePage]+4);
+    )).slice(movieNum[activePageR], movieNum[activePageR]+4);
 
     return (
       <div className="album">
